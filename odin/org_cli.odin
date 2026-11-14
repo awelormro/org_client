@@ -3,6 +3,7 @@ package main
 import "core:fmt"
 import "core:os"
 import "core:flags"
+import "org_library"
 
 Orgcli_options :: struct {
   name_file: string `args:"name=name_file"`,
@@ -16,13 +17,34 @@ Orgcli_options :: struct {
   cursor_col: int `args:"name=cursor_col"`
 }
 
+Token_lines :: struct {
+  type_line: string,
+  cont_line: string,
+  number_line: int
+}
+
+token_part :: struct {
+  type_token: string,
+  cont_token: string,
+  len_token: int,
+  start_token: int,
+  end_token: int,
+  line_token: int
+}
+
 main :: proc() {
   options: Orgcli_options
   // flags.parse_or_exit(&options, os.args[1:], style = .Unix)
   flags.parse_or_exit(&options, os.args, style = .Unix)
+  file_name := ""
+  exit_file_name := ""
+  checkbox_recalculation := true
+  folding_calculation := true
+  cursor_col := -1
+  cursor_row := -1
+  table_adjustment := false
   if len(os.args) <= 1 {
     fmt.print("None option selected, use defaults")
-    return
   } else {
     if options.name_file != "" {
       fmt.printfln("Existe nombre, se arma") 
@@ -41,4 +63,7 @@ main :: proc() {
     }
     fmt.println("Hellope!")
   }
+  org_library.read_file_by_lines_in_whole(options.name_file)
 }
+
+

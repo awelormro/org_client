@@ -1,0 +1,11 @@
+* Pendejada aleatoria
+
+lorem
+
+** Otra mamada
+
+lorem
+
+Cosas lol
+
+- [ ] Mamada con checkbox
